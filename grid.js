@@ -152,6 +152,16 @@ function userHasWin() {
     return true;
 }
 
+// change grid color, display mine count
+function openCell(i, j) {
+    
+}
+
+// check game status from the interacting grid, return -1 if lose, 0 if continue, 1 if win
+function getGameStatus() {
+    
+}    
+
 init();
 
 window.addEventListener('contextmenu', (event) => {
