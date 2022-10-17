@@ -104,7 +104,7 @@ function init() {
             // if (grid[i][j].hasMine) {
             //     buttonColor = "btn-danger";
             // }
-            gridDOMElement += '<button data-has-mine=' + grid[i][j].hasMine + ' data-i=' + i + ' data-j=' + j + ' class="col cell btn ' + buttonColor + '" onmousedown="cellOnClick(event, this)"></button>';
+            gridDOMElement += '<button id=' + i + '-' + j + ' data-has-mine=' + grid[i][j].hasMine + ' data-i=' + i + ' data-j=' + j + ' class="col cell btn ' + buttonColor + '" onmousedown="cellOnClick(event, this)"></button>';
         }
         gridDOMElement += '</div>';
     }
@@ -127,9 +127,8 @@ function cellOnClick(event, cell) {
             }
             console.log('You lose!');
         } else {
-            cell.innerHTML = grid[cell.dataset.i][cell.dataset.j].adjacentMineCount;
-            cell.classList.add("btn-info");
-            cell.classList.remove("btn-secondary");
+            let(i, j) = cell.id.split('-'); // [1,3]
+            openCell(i, j);
             // cell.innerHTML = "<div></div>";
         }
     } else if (event.button === 2 && cell.innerHTML === '') {
@@ -154,13 +153,16 @@ function userHasWin() {
 
 // change grid color, display mine count
 function openCell(i, j) {
-    
+    let cell = document.getElementById(i + '-' + j);
+    cell.innerHTML = grid[i][j].adjacentMineCount;
+    cell.classList.add("btn-info");
+    cell.classList.remove("btn-secondary");
 }
 
 // check game status from the interacting grid, return -1 if lose, 0 if continue, 1 if win
 function getGameStatus() {
-    
-}    
+
+}
 
 init();
 
